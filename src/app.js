@@ -1,12 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const mongoose = require('mongoose');
+import express from "express";
+import db from "./config/dbConnect.js";
+
+db.on("error", console.log.bind(console, 'Database connection error'))
+db.once("open", () => {
+    console.log('Connected to the database');
+});
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
-app.use(cors());
+app.use(express.json());
 
-mongoose.connect()
+export default app;
